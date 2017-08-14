@@ -1,8 +1,9 @@
 package com.dekinci.photoviewer.photo.tagging;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Tags {
+public class Tags implements Serializable{
     private LinkedList<String> tags = new LinkedList<>();
     private boolean hasTags;
 

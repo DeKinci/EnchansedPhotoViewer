@@ -5,8 +5,9 @@ import com.dekinci.photoviewer.photo.rating.Rating;
 import com.dekinci.photoviewer.photo.tagging.Tags;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
 import java.io.*;
 import java.util.LinkedList;
 
@@ -70,8 +71,20 @@ public class PVImage implements Serializable {
         return this.imgStats.getAtt();
     }
 
-///////////////////////////////////////////////////////////////////////////////
+    public BufferedImage getBufferedImage() {
+        ColorModel cm = image.getColorModel();
+        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+        WritableRaster raster = image.copyData(null);
+        return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+    }
 
-    //image getters
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+        ImageIO.write(image, "png", out);
+    }
 
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        image = ImageIO.read(in);
+    }
 }

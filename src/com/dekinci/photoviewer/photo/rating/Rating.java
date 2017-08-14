@@ -1,6 +1,8 @@
 package com.dekinci.photoviewer.photo.rating;
 
-public class Rating {
+import java.io.Serializable;
+
+public class Rating implements Serializable{
     private int rating;
     private boolean hasRating;
 

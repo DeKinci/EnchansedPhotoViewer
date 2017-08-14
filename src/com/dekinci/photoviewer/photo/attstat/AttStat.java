@@ -1,9 +1,10 @@
 package com.dekinci.photoviewer.photo.attstat;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 
-public class AttStat {
+public class AttStat implements Serializable{
     LinkedList<Attitude> stats;
     private int likeCounter;
     private int dislikeCounter;
