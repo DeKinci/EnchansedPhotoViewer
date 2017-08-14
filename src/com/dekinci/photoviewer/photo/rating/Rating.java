@@ -10,8 +10,10 @@ public class Rating implements Serializable{
         this.hasRating = false;
     }
 
-    public Rating(int newRating) throws OutOfRatingExceptions {
-        setRating(newRating);
+    public Rating(int newRating) {
+
+        this.hasRating = true;
+
     }
 
     public void setRating(int newRating) throws OutOfRatingExceptions{

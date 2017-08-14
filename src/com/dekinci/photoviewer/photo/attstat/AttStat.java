@@ -10,8 +10,26 @@ public class AttStat implements Serializable{
     private int dislikeCounter;
 
     public AttStat() {
-        this.likeCounter = 0;
+        init();
         this.stats = new LinkedList<>();
+    }
+
+    public AttStat(LinkedList<Date> likes, LinkedList<Date> dislikes) {
+        init();
+        for (Date d: likes) {
+            this.likeCounter++;
+            this.stats.add(new Like(d));
+        }
+
+        for (Date d: dislikes) {
+            this.dislikeCounter++;
+            this.stats.add(new Dislike(d));
+        }
+    }
+
+    private void init() {
+        this.likeCounter = 0;
+        this.dislikeCounter = 0;
     }
 
     public void like() {
@@ -32,7 +50,7 @@ public class AttStat implements Serializable{
         LinkedList<Date> likesToReturn = new LinkedList<>();
         for (Attitude a: stats)
             if (a instanceof Like)
-                likesToReturn.addLast(a.getDateChanged());
+                likesToReturn.addLast(a.getDateCreated());
         return likesToReturn;
     }
 
@@ -40,7 +58,11 @@ public class AttStat implements Serializable{
         LinkedList<Date> dislikesToReturn = new LinkedList<>();
         for (Attitude a: stats)
             if (a instanceof Dislike)
-                dislikesToReturn.addLast(a.getDateChanged());
+                dislikesToReturn.addLast(a.getDateCreated());
         return dislikesToReturn;
+    }
+
+    public LinkedList<Attitude> getAtts() {
+        return new LinkedList<Attitude>(stats);
     }
 }

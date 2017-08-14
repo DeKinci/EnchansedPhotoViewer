@@ -5,14 +5,12 @@ import java.util.LinkedList;
 
 public class Tags implements Serializable{
     private LinkedList<String> tags = new LinkedList<>();
-    private boolean hasTags;
+    private boolean hasTags = false;
 
-    public Tags() {
-        hasTags = false;
-    }
+    public Tags() { }
 
-    public Tags(String newTags[]) {
-        if (newTags.length != 0) {
+    public Tags(LinkedList<String> newTags) {
+        if (!newTags.isEmpty()) {
             hasTags = true;
             for (String tag : newTags)
                 this.tags.addLast(tag);

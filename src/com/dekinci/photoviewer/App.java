@@ -14,22 +14,18 @@ public class App {
         App app = new App();
 
         //app.serialize();
-        app.deserialize();
 
+        app.deserialize();
         app.writeImage();
     }
 
     public void serialize() {
         File img = new File("misc/img.jpg");
-        String[] test = "test".split(" ");
+        File out = new File("misc/img.pvi");
 
         try {
-            testImage = new PVImage(img);
-            FileOutputStream fos = new FileOutputStream("misc/img.pvi");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(testImage);
-            oos.flush();
-            oos.close();
+            testImage = PVImage.importFile(img);
+            testImage.saveFile(out);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Rating.OutOfRatingExceptions outOfRatingExceptions) {
@@ -38,16 +34,10 @@ public class App {
     }
 
     public void deserialize() {
-        FileInputStream fis = null;
+        File in = new File("misc/img.pvi");
         try {
-            fis = new FileInputStream("misc/img.pvi");
-            ObjectInputStream oin = new ObjectInputStream(fis);
-            testImage = (PVImage) oin.readObject();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+            testImage = PVImage.openFile(in);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

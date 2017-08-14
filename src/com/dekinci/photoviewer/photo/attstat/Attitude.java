@@ -3,13 +3,17 @@ package com.dekinci.photoviewer.photo.attstat;
 import java.util.Date;
 
 abstract class Attitude {
-    private Date dateChanged;
+    private Date dateCreated;
 
     public Attitude() {
-        dateChanged = new Date();
+        this.dateCreated = new Date();
     }
 
-    public Date getDateChanged() {
-        return new Date(dateChanged.getTime());
+    public Attitude (Date creationDate) {
+        this.dateCreated = creationDate;
+    }
+
+    public Date getDateCreated() {
+        return new Date(dateCreated.getTime());
     }
 }
