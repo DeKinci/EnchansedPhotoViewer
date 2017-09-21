@@ -1,11 +1,11 @@
-package com.dekinci.photoviewer.photo.attstat;
+package com.dekinci.photoviewer.unit.data.attstat;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 
 public class AttStat implements Serializable{
-    LinkedList<Attitude> stats;
+    private LinkedList<Attitude> stats;
     private int likeCounter;
     private int dislikeCounter;
 
@@ -63,6 +63,6 @@ public class AttStat implements Serializable{
     }
 
     public LinkedList<Attitude> getAtts() {
-        return new LinkedList<Attitude>(stats);
+        return new LinkedList<>(stats);
     }
 }

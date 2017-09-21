@@ -1,19 +1,19 @@
-package com.dekinci.photoviewer.photo.attstat;
+package com.dekinci.photoviewer.unit.data.attstat;
 
 import java.util.Date;
 
 abstract class Attitude {
     private Date dateCreated;
 
-    public Attitude() {
+    Attitude() {
         this.dateCreated = new Date();
     }
 
-    public Attitude (Date creationDate) {
+    Attitude(Date creationDate) {
         this.dateCreated = creationDate;
     }
 
-    public Date getDateCreated() {
+    Date getDateCreated() {
         return new Date(dateCreated.getTime());
     }
 }

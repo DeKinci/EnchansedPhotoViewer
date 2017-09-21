@@ -1,4 +1,4 @@
-package com.dekinci.photoviewer.photo.rating;
+package com.dekinci.photoviewer.unit.data.rating;
 
 import java.io.Serializable;
 
@@ -10,44 +10,43 @@ public class Rating implements Serializable{
         this.hasRating = false;
     }
 
-    public Rating(int newRating) {
-
+    public Rating(int newRating) throws OutOfRatingException {
         this.hasRating = true;
-
+        setRating(newRating);
     }
 
-    public void setRating(int newRating) throws OutOfRatingExceptions{
+    public void setRating(int newRating) throws OutOfRatingException {
         if (newRating >= 0 && newRating <= 11) {
             this.hasRating = true;
             this.rating = newRating;
         }
         else
-            throw new OutOfRatingExceptions();
+            throw new OutOfRatingException();
     }
 
     public void removeRating() {
         this.hasRating = false;
     }
 
-    public int getRating() throws NoRatingExceptions {
+    public int getRating() throws NoRatingException {
         if (this.hasRating)
             return this.rating;
         else
-            throw new NoRatingExceptions();
+            throw new NoRatingException();
     }
 
     public boolean hasRating() {
         return this.hasRating;
     }
 
-    public class NoRatingExceptions extends Exception{
-        private NoRatingExceptions() {
+    public class NoRatingException extends Exception{
+        private NoRatingException() {
             super("No rating");
         }
     }
 
-    public class OutOfRatingExceptions extends Exception{
-        private OutOfRatingExceptions() {
+    public class OutOfRatingException extends Exception{
+        private OutOfRatingException() {
             super("Rating value is too big or too small");
         }
     }

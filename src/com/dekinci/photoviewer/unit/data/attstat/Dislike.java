@@ -1,13 +1,13 @@
-package com.dekinci.photoviewer.photo.attstat;
+package com.dekinci.photoviewer.unit.data.attstat;
 
 import java.util.Date;
 
 class Dislike extends Attitude{
-    public Dislike() {
+    Dislike() {
         super();
     }
 
-    public Dislike(Date dateCreated) {
+    Dislike(Date dateCreated) {
         super(dateCreated);
     }
 }

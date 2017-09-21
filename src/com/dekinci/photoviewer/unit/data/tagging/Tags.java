@@ -1,4 +1,4 @@
-package com.dekinci.photoviewer.photo.tagging;
+package com.dekinci.photoviewer.unit.data.tagging;
 
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -43,7 +43,7 @@ public class Tags implements Serializable{
 
     public LinkedList<String> getTags() throws EmptyTagsException {
         if (hasTags)
-            return new LinkedList<String>(tags);
+            return new LinkedList<>(tags);
         else throw new EmptyTagsException();
     }
 
