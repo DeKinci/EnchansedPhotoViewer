@@ -1,8 +1,9 @@
 package main.java.photoviewer.core.files.unit.data.info.dates;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public abstract class DateChanged {
+public abstract class DateChanged implements Serializable{
     private Date date;
 
     public DateChanged() {

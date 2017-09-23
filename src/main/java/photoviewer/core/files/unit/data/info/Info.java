@@ -8,7 +8,9 @@ import main.java.photoviewer.core.files.unit.data.info.name.Name;
 import main.java.photoviewer.core.files.unit.data.info.rating.Rating;
 import main.java.photoviewer.core.files.unit.data.info.tagging.Tags;
 
-public class Info {
+import java.io.Serializable;
+
+public class Info implements Serializable {
     private Rating rating;
     private Tags tags;
     private AttStat attStat;

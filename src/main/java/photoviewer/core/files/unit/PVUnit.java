@@ -45,7 +45,7 @@ public abstract class PVUnit implements Serializable {
     }
 
     public Info getInfo() {
-        return info;
+        return this.info;
     }
 
     private void writeObject(ObjectOutputStream out) throws IOException {

@@ -1,6 +1,8 @@
 package main.java.photoviewer.core.files.unit.data.info.name;
 
-public class Name {
+import java.io.Serializable;
+
+public class Name implements Serializable {
     private String name;
 
     public Name(String name) {
