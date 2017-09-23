@@ -64,6 +64,7 @@ public class RecentlyOpenedFiles implements Serializable {
         this.recentlyOpenedFilesObservableList.add(file);
     }
 
+    //TODO: make it impossible to change one list wo another
     public ObservableList<File> getRecentlyOpenedFilesObservableList() {
         return this.recentlyOpenedFilesObservableList;
     }
