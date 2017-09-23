@@ -34,7 +34,7 @@ public abstract class PVUnit implements Serializable {
             oos.flush();
             oos.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("File to output is not found");
         }
     }
 

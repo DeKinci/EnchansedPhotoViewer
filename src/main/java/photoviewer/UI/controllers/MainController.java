@@ -4,25 +4,32 @@ import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import main.java.photoviewer.UI.content.tabs.contenttab.ContentTabFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import main.java.photoviewer.UI.content.tabs.blanktab.BlankTabFactory;
 import main.java.photoviewer.UI.content.tabs.newtabbuttontab.NewTabButtonTabFactory;
-import main.java.photoviewer.core.files.PVInstance;
+import main.java.photoviewer.model.Application;
+
+import java.io.File;
 
 
 public class MainController {
-    PVInstance pvFile = new PVInstance();
+    private Application application;
+
     private BlankTabFactory blankTabFactory;
-    private ContentTabFactory contentTabFactory;
     private NewTabButtonTabFactory newTabButtonTabFactory;
 
     @FXML
     TabPane tabPane;
 
+    @FXML
+    AnchorPane mainPane;
+
     public MainController() {
         blankTabFactory = BlankTabFactory.getInstance();
-        contentTabFactory = ContentTabFactory.getInstance();
         newTabButtonTabFactory = NewTabButtonTabFactory.getInstance();
+
+        this.application = Application.getApplication();
     }
 
     @FXML
@@ -40,24 +47,21 @@ public class MainController {
         tabPane.getTabs().add(newTabButtonTabFactory.getNewTabButtonTab());
     }
 
-
     @FXML
     public void openFileMenuClick() {
-        Tab tab = contentTabFactory.getTab();
-        tab.getContent().setScaleX(tabPane.getScaleX());
-        tab.getContent().setScaleY(tabPane.getScaleY());
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open image");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Image Files", "*.epvi", "*.jpg", "*.png")
+        );
 
-        tabPane.getTabs().add(tab);
-        tabPane.getSelectionModel().select(tab);
+        File selectedFile = fileChooser.showOpenDialog(mainPane.getScene().getWindow());
+        if (selectedFile != null)
+            application.openFile(selectedFile);
     }
 
     @FXML
     public void saveFileMenuClick() {
-
-    }
-
-    @FXML
-    public void importFileMenuClick() {
 
     }
 

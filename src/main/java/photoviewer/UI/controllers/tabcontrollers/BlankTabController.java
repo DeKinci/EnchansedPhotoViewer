@@ -1,25 +1,37 @@
 package main.java.photoviewer.UI.controllers.tabcontrollers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import main.java.photoviewer.UI.content.tabs.blanktab.RecentlyOpenedFiles;
+import main.java.photoviewer.model.Application;
 
 import java.io.File;
 
 public class BlankTabController {
+    Application application;
+    RecentlyOpenedFiles recentlyOpenedFilesList;
 
     @FXML
     ListView recentFilesView;
 
-    private ObservableList<File> recentFiles = FXCollections.observableArrayList(new File("misc/img.jpg"), new File("misc/out.png"));
+    public BlankTabController() {
+        application = Application.getApplication();
+
+        recentlyOpenedFilesList = RecentlyOpenedFiles.getInstance();
+    }
 
     @FXML
     public void initialize() {
-        recentFilesView.setItems(recentFiles);
+        recentFilesView.setItems(recentlyOpenedFilesList.getRecentlyOpenedFilesObservableList());
 
         recentFilesView.setOnMouseClicked(event -> {
-                //TODO
+                if (event.getClickCount() > 1)
+                    application.openFile((File) recentFilesView.getSelectionModel().getSelectedItem());
         });
+    }
+
+    @FXML
+    public void clearButton() {
+        recentlyOpenedFilesList.clearFiles();
     }
 }

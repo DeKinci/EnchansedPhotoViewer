@@ -10,11 +10,16 @@ import java.io.IOException;
 public class UI {
     private Stage stage;
 
-    public UI(Stage primaryStage) throws IOException {
+    public UI(Stage primaryStage) {
         this.stage = primaryStage;
         this.stage.setTitle("Enhanced Photo Viewer");
 
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/main/resources/gui/main.fxml"));
+        AnchorPane pane = null;
+        try {
+            pane = FXMLLoader.load(getClass().getResource("/main/resources/gui/main.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         primaryStage.setScene(new Scene(pane, 1280, 720));
         primaryStage.show();
     }

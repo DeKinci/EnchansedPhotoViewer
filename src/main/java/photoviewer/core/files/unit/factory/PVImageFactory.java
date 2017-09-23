@@ -3,15 +3,12 @@ package main.java.photoviewer.core.files.unit.factory;
 import main.java.photoviewer.core.files.image.PVImage;
 import main.java.photoviewer.core.files.unit.PVUnit;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 
 public class PVImageFactory implements PVUnitFactory {
     private volatile static PVImageFactory imageFactory;
 
-    public static PVImageFactory makeContentFactory() {
+    public static PVImageFactory getInstance() {
         if (imageFactory == null)
             synchronized (PVImageFactory.class) {
                 if (imageFactory == null)
@@ -22,18 +19,21 @@ public class PVImageFactory implements PVUnitFactory {
     }
 
     private PVImageFactory() {
-
     }
 
     @Override
-    public PVUnit importFile(File source) throws IOException {
-        return new PVImage(source);
-    }
+    public PVUnit openFile(File source) throws IOException {
+        PVImage image;
 
-    @Override
-    public PVUnit openFile(File source) throws IOException, ClassNotFoundException {
-        FileInputStream fis = new FileInputStream(source);
-        ObjectInputStream oin = new ObjectInputStream(fis);
-        return new PVImage((PVImage) oin.readObject());
+        try {
+            FileInputStream fis = new FileInputStream(source);
+            ObjectInputStream oin = new ObjectInputStream(fis);
+            image = new PVImage((PVImage) oin.readObject());
+        }
+        catch (StreamCorruptedException | ClassNotFoundException e) {
+            image = new PVImage(source);
+        }
+
+        return image;
     }
 }
