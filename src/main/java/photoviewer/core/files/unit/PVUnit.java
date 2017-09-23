@@ -33,15 +33,21 @@ public abstract class PVUnit implements Serializable {
             oos.writeObject(this);
             oos.flush();
             oos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    public void exportContent(File outputFile) {
+        try {
+            ContentIO.write(this.content, outputFile);
+        } catch (IOException e) {
+            System.err.println("File to export is not found");
+        }
+    }
+
     public Object getContent() {
-        return content.getContent();
+        return this.content.getContent();
     }
 
     public Info getInfo() {
@@ -50,7 +56,7 @@ public abstract class PVUnit implements Serializable {
 
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
-        ContentIO.write(content, out);
+        ContentIO.write(this.content, out);
     }
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {

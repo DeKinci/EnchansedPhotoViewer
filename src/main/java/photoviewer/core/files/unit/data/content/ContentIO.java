@@ -10,6 +10,10 @@ import java.io.ObjectOutputStream;
 public class ContentIO {
     private static ContentFactory contentFactory = ContentFactory.makeContentFactory();
 
+    public static void write(Content content, File file) throws IOException {
+        ImageIO.write((BufferedImage) content.getContent(), "png", file);
+    }
+
     public static void write(Content content, ObjectOutputStream objectOutputStream) throws IOException {
         ImageIO.write((BufferedImage) content.getContent(), "png", objectOutputStream);
     }

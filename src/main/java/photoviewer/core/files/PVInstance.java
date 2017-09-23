@@ -3,7 +3,6 @@ package main.java.photoviewer.core.files;
 import main.java.photoviewer.core.files.unit.PVUnit;
 import main.java.photoviewer.core.files.unit.factory.PVImageFactory;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -46,13 +45,6 @@ public class PVInstance implements Runnable {
         }
     }
 
-    public void saveImage() {
-        File out = new File("misc/img" + fileExtension);
-
-        image.saveFile(out);
-
-    }
-
     public void openImage() {
         File in = new File("misc/img" + fileExtension);
         try {
@@ -62,11 +54,12 @@ public class PVInstance implements Runnable {
         }
     }
 
+    public void saveImage() {
+        image.saveFile(new File("misc/img" + fileExtension));
+
+    }
+
     public void exportImage() {
-        try {
-            ImageIO.write((BufferedImage) image.getContent(), "PNG", new File("misc/out.png"));
-        } catch (IOException e) {
-            System.err.println("File to export is not found");
-        }
+        image.exportContent(new File("misc/out.png"));
     }
 }
