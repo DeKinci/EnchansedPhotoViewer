@@ -1,4 +1,4 @@
-package main.java.photoviewer.core.files.unit.data.tagging;
+package main.java.photoviewer.core.files.unit.data.info.tagging;
 
 import java.io.Serializable;
 import java.util.LinkedList;

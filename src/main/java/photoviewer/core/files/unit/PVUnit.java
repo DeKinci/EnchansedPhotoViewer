@@ -1,50 +1,29 @@
 package main.java.photoviewer.core.files.unit;
 
-import main.java.photoviewer.core.files.unit.data.attstat.AttStat;
+import main.java.photoviewer.core.files.unit.data.content.Content;
 import main.java.photoviewer.core.files.unit.data.content.ContentFactory;
 import main.java.photoviewer.core.files.unit.data.content.ContentIO;
-import main.java.photoviewer.core.files.unit.data.content.Content;
-import main.java.photoviewer.core.files.unit.data.rating.Rating;
-import main.java.photoviewer.core.files.unit.data.tagging.Tags;
+import main.java.photoviewer.core.files.unit.data.info.Info;
 
 import java.io.*;
-import java.util.Date;
-import java.util.LinkedList;
 
 public abstract class PVUnit implements Serializable {
     private transient ContentFactory contentFactory = ContentFactory.makeContentFactory();
     transient protected Content content;
 
-    private String unitName;
-    private Rating unitRating;
-    private Tags unitTags;
-    private AttStat unitStats;
+    private Info info;
 
     public PVUnit(File source) throws IOException {
         this.content = contentFactory.createContent(ContentIO.read(source));
-        this.unitName = source.getName().substring(0, source.getName().lastIndexOf("."));
-        this.unitRating = new Rating();
-        this.unitTags = new Tags();
-        this.unitStats = new AttStat();
+        this.info = new Info(
+                source.getName().substring(0,
+                        source.getName().lastIndexOf(".")));
+
     }
 
     public PVUnit(PVUnit source) {
         this.content = contentFactory.createContent(source.getContent());
-        this.unitName = source.toString();
-
-        try {
-            this.unitRating = new Rating(source.getRating());
-        } catch (Rating.NoRatingException | Rating.OutOfRatingException e) {
-            this.unitRating = new Rating();
-        }
-
-        try {
-            this.unitTags = new Tags(source.getTags());
-        } catch (Tags.EmptyTagsException e) {
-            this.unitTags = new Tags();
-        }
-
-        this.unitStats = new AttStat(source.getLikes(), source.getDislikes());
+        this.info = source.getInfo();
     }
 
     public void saveFile(File outputFile) {
@@ -61,56 +40,12 @@ public abstract class PVUnit implements Serializable {
         }
     }
 
-    public void setName(String newName) {
-        this.unitName = newName;
-    }
-
-    public int getRating() throws Rating.NoRatingException {
-        return this.unitRating.getRating();
-    }
-
-    public boolean hasRating() {
-        return this.unitRating.hasRating();
-    }
-
-    public void setRating(int newRating) throws Rating.OutOfRatingException {
-        this.unitRating.setRating(newRating);
-    }
-
-    public void addTag(String newTag) throws Tags.TagExistsException {
-        this.unitTags.addTeg(newTag);
-    }
-
-    public void removeTag(String removingName) throws Tags.TagNotFoundException {
-        this.unitTags.removeTag(removingName);
-    }
-
-    public void clearTags() {
-        this.unitTags.clearTags();
-    }
-
-    public boolean hasTags() {
-        return this.unitTags.hasTags();
-    }
-
-    public LinkedList<String> getTags() throws Tags.EmptyTagsException {
-        return this.unitTags.getTags();
-    }
-
-    public int getAtt() {
-        return this.unitStats.getAtt();
-    }
-
-    public LinkedList<Date> getLikes() {
-        return unitStats.getLikes();
-    }
-
-    public LinkedList<Date> getDislikes() {
-        return unitStats.getDislikes();
-    }
-
     public Object getContent() {
         return content.getContent();
+    }
+
+    public Info getInfo() {
+        return info;
     }
 
     private void writeObject(ObjectOutputStream out) throws IOException {
@@ -125,6 +60,6 @@ public abstract class PVUnit implements Serializable {
 
     @Override
     public String toString() {
-        return this.unitName;
+        return this.info.getName().toString();
     }
 }

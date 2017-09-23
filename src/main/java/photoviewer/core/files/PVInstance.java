@@ -49,11 +49,8 @@ public class PVInstance implements Runnable {
     public void saveImage() {
         File out = new File("misc/img" + fileExtension);
 
-        try {
-            image.saveFile(out);
-        } catch (IOException e) {
-            System.err.println("File to save is not found");
-        }
+        image.saveFile(out);
+
     }
 
     public void openImage() {
