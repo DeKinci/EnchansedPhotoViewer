@@ -1,9 +1,11 @@
-package main.java.photoviewer.UI.content.tabs.contenttab;
+package photoviewer.UI.content.tabs.contenttab;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
-import main.java.photoviewer.UI.content.tabs.tabfactory.TabFactory;
+import photoviewer.UI.content.tabs.tabfactory.TabFactory;
+import photoviewer.UI.controllers.tabcontrollers.contenttabcontrollers.ContentTabController;
+import photoviewer.core.files.unit.PVUnit;
 
 import java.io.IOException;
 
@@ -21,29 +23,28 @@ public class ContentTabFactory implements TabFactory {
     }
 
     private ContentTabFactory() {
-
     }
 
-    @Override
-    public Tab getTab() {
-        return loadFXML(new Tab());
+    public Tab getTab(PVUnit unit) {
+        Tab tab = new Tab(unit.toString());
+        builtTab(tab, unit);
+
+        return tab;
     }
 
-    @Override
-    public Tab getTab(String name) {
-        return loadFXML(new Tab(name));
-    }
-
-    private Tab loadFXML(Tab tab) {
+    private void builtTab(Tab tab, PVUnit unit) {
         SplitPane pane = null;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/tabs/contenttab/contenttab.fxml"));
 
         try {
-            pane = FXMLLoader.load(getClass().getResource("/main/resources/gui/tabs/contenttab.fxml"));
+            pane = loader.load();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error loading content: contenttab");
         }
 
+        ContentTabController contentTabController = loader.getController();
+        contentTabController.initializeWithUnit(unit);
+
         tab.setContent(pane);
-        return tab;
     }
 }

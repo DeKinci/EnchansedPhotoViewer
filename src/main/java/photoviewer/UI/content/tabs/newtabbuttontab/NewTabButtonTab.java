@@ -1,4 +1,4 @@
-package main.java.photoviewer.UI.content.tabs.newtabbuttontab;
+package photoviewer.UI.content.tabs.newtabbuttontab;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -11,21 +11,21 @@ import java.io.IOException;
  * conditional lock here
  */
 
-public class NewTabButtonTabFactory {
-    private static NewTabButtonTabFactory ourInstance = new NewTabButtonTabFactory();
+public class NewTabButtonTab {
+    private static NewTabButtonTab ourInstance = new NewTabButtonTab();
     private Tab newTabButtonTab;
 
-    public static NewTabButtonTabFactory getInstance() {
+    public static NewTabButtonTab getInstance() {
         return ourInstance;
     }
 
-    private NewTabButtonTabFactory() {
+    private NewTabButtonTab() {
         this.newTabButtonTab = new Tab();
         this.newTabButtonTab.setClosable(false);
 
         Button newTabButton = null; //TODO: Replace with an image
         try {
-            newTabButton = FXMLLoader.load(getClass().getResource("/main/resources/gui/tabs/tabbuttons/newtabbutton.fxml"));
+            newTabButton = FXMLLoader.load(getClass().getResource("/fxml/tabs/tabbuttons/newtabbutton.fxml"));
         } catch (IOException e) {
             System.err.println("Error loading newtabbutton.fxml");
         }

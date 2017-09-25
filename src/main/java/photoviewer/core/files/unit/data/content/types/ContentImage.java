@@ -1,6 +1,7 @@
-package main.java.photoviewer.core.files.unit.data.content.types;
+package photoviewer.core.files.unit.data.content.types;
 
-import main.java.photoviewer.core.files.unit.data.content.Content;
+
+import photoviewer.core.files.unit.data.content.Content;
 
 import java.awt.image.BufferedImage;
 

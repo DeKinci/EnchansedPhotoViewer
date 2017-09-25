@@ -1,8 +1,8 @@
-package main.java.photoviewer;
+package photoviewer;
 
-import main.java.photoviewer.UI.UI;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import photoviewer.UI.UI;
 
 public class Main extends Application {
     public static void main(String... args) {

@@ -1,6 +1,6 @@
-package main.java.photoviewer.core.files.image;
+package photoviewer.core.files.image;
 
-import main.java.photoviewer.core.files.unit.PVUnit;
+import photoviewer.core.files.unit.PVUnit;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

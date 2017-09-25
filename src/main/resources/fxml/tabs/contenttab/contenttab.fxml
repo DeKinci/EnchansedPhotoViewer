@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<SplitPane fx:id="unitPane" dividerPositions="0.20261437908496732" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="photoviewer.UI.controllers.tabcontrollers.contenttabcontrollers.ContentTabController">
+  <items>
+      <VBox fx:id="infoBox" />
+      <StackPane fx:id="contentPane">
+         <children>
+            <ImageView fx:id="imageView" pickOnBounds="true" preserveRatio="true" />
+         </children></StackPane>
+  </items>
+</SplitPane>

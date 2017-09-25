@@ -1,15 +1,15 @@
-package main.java.photoviewer.UI.controllers.tabcontrollers;
+package photoviewer.UI.controllers.tabcontrollers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import main.java.photoviewer.UI.content.tabs.blanktab.RecentlyOpenedFiles;
-import main.java.photoviewer.model.Application;
+import photoviewer.UI.content.tabs.blanktab.RecentlyOpenedFiles;
+import photoviewer.model.Application;
 
 import java.io.File;
 
 public class BlankTabController {
-    Application application;
-    RecentlyOpenedFiles recentlyOpenedFilesList;
+    private Application application;
+    private RecentlyOpenedFiles recentlyOpenedFilesList;
 
     @FXML
     ListView recentFilesView;
@@ -22,11 +22,14 @@ public class BlankTabController {
 
     @FXML
     public void initialize() {
-        recentFilesView.setItems(recentlyOpenedFilesList.getRecentlyOpenedFilesObservableList());
+        recentFilesView.setItems(recentlyOpenedFilesList.getRecentlyOpenedFiles());
 
         recentFilesView.setOnMouseClicked(event -> {
-                if (event.getClickCount() > 1)
-                    application.openFile((File) recentFilesView.getSelectionModel().getSelectedItem());
+                if (event.getClickCount() > 1) {
+                    File file = (File) recentFilesView.getSelectionModel().getSelectedItem();
+                    if (file != null)
+                        application.openFile(file);
+                }
         });
     }
 

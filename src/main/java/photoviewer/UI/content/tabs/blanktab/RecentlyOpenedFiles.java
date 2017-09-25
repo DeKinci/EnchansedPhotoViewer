@@ -1,4 +1,4 @@
-package main.java.photoviewer.UI.content.tabs.blanktab;
+package photoviewer.UI.content.tabs.blanktab;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,40 +7,42 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class RecentlyOpenedFiles implements Serializable {
-    private static final String stateSaver = "res/statesaver/recentlyOpenedFilesList.dat";
+    private static final String stateSaver = "src/main/resources/statesaver/recentlyOpenedFiles.dat";
     private static final long serialVersionUID = 1L;
 
     private volatile static RecentlyOpenedFiles instance;
 
-    private ArrayList<File> recentlyOpenedFilesList;
-    private transient ObservableList<File> recentlyOpenedFilesObservableList;
+    private ObservableList<File> recentlyOpenedFiles;
 
     public static RecentlyOpenedFiles getInstance() {
         if (instance == null)
             synchronized (RecentlyOpenedFiles.class) {
-            if (instance == null)
-                try {
-                    FileInputStream fis = new FileInputStream(stateSaver);
-                    ObjectInputStream ois = new ObjectInputStream(fis);
-                    instance = (RecentlyOpenedFiles) ois.readObject();
-                    instance.init();
-                } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
-                    instance = new RecentlyOpenedFiles();
-                }
+                if (instance == null)
+                    try {
+                        FileInputStream fis = new FileInputStream(stateSaver);
+                        ObjectInputStream ois = new ObjectInputStream(fis);
+                        instance = (RecentlyOpenedFiles) ois.readObject();
+                        instance.init();
+                    } catch (IOException | ClassNotFoundException e) {
+                        try {
+                            if (!new File(stateSaver).createNewFile())
+                                System.err.println("Save file exists but damaged");
+                        } catch (IOException e1) {
+                            System.err.println("Something wrong has happened...");
+                        }
+                        instance = new RecentlyOpenedFiles();
+                    }
             }
 
         return instance;
     }
 
     private RecentlyOpenedFiles() {
-        recentlyOpenedFilesList = new ArrayList<>();
+        recentlyOpenedFiles = FXCollections.observableArrayList();
         init();
     }
 
     private void init() {
-        recentlyOpenedFilesObservableList = FXCollections.observableArrayList(recentlyOpenedFilesList);
-
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
                 FileOutputStream fos = new FileOutputStream(stateSaver);
@@ -55,21 +57,28 @@ public class RecentlyOpenedFiles implements Serializable {
     }
 
     public void clearFiles() {
-        this.recentlyOpenedFilesList.clear();
-        this.recentlyOpenedFilesObservableList.clear();
+        this.recentlyOpenedFiles.clear();
     }
 
     public void addFile(File file) {
-        this.recentlyOpenedFilesList.add(file);
-        this.recentlyOpenedFilesObservableList.add(file);
+        if (this.recentlyOpenedFiles.contains(file)) {//Not to allow the same file to be twice in the list
+            this.recentlyOpenedFiles.remove(file);
+        }
+
+        this.recentlyOpenedFiles.add(0, file);
     }
 
-    //TODO: make it impossible to change one list wo another
-    public ObservableList<File> getRecentlyOpenedFilesObservableList() {
-        return this.recentlyOpenedFilesObservableList;
+    public ObservableList<File> getRecentlyOpenedFiles() {
+        return this.recentlyOpenedFiles;
     }
 
-    public ArrayList<File> getRecentlyOpenedFilesList() {
-        return this.recentlyOpenedFilesList;
+    private void writeObject(ObjectOutputStream oos) throws IOException {
+        ArrayList fileArrayList = new ArrayList(recentlyOpenedFiles);
+        oos.writeObject(fileArrayList);
+    }
+
+    private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+        ArrayList fileArrayList = (ArrayList) ois.readObject();
+        recentlyOpenedFiles = FXCollections.observableArrayList(fileArrayList);
     }
 }

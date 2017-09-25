@@ -1,4 +1,4 @@
-package main.java.photoviewer.core.files.unit.data.content;
+package photoviewer.core.files.unit.data.content;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

@@ -1,17 +1,18 @@
-package main.java.photoviewer.model;
+package photoviewer.model;
 
-import main.java.photoviewer.UI.content.tabs.blanktab.RecentlyOpenedFiles;
-import main.java.photoviewer.model.instance.Instance;
-import main.java.photoviewer.model.instance.InstanceFactory;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import photoviewer.UI.content.tabs.blanktab.RecentlyOpenedFiles;
+import photoviewer.model.instance.Instance;
+import photoviewer.model.instance.InstanceFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
 
 public class Application {
     private volatile static Application application = new Application();
 
-    private LinkedList<Instance> instances;
+    private ObservableList<Instance> instances;
     private InstanceFactory instanceFactory;
 
     public static Application getApplication() {
@@ -19,11 +20,11 @@ public class Application {
     }
 
     private Application() {
-        instances = new LinkedList<>();
+        instances = FXCollections.observableArrayList();
         instanceFactory = InstanceFactory.getInstanceFactory();
     }
 
-    public LinkedList<Instance> getInstances() {
+    public ObservableList<Instance> getInstances() {
         return instances;
     }
 

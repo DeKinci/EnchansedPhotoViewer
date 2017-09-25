@@ -1,4 +1,4 @@
-package main.java.photoviewer.UI.controllers;
+package photoviewer.UI.controllers;
 
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
@@ -6,9 +6,10 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
-import main.java.photoviewer.UI.content.tabs.blanktab.BlankTabFactory;
-import main.java.photoviewer.UI.content.tabs.newtabbuttontab.NewTabButtonTabFactory;
-import main.java.photoviewer.model.Application;
+import photoviewer.UI.content.tabs.blanktab.BlankTabFactory;
+import photoviewer.UI.content.tabs.newtabbuttontab.NewTabButtonTab;
+import photoviewer.model.Application;
+import photoviewer.model.instance.Instance;
 
 import java.io.File;
 
@@ -17,7 +18,7 @@ public class MainController {
     private Application application;
 
     private BlankTabFactory blankTabFactory;
-    private NewTabButtonTabFactory newTabButtonTabFactory;
+    private NewTabButtonTab newTabButtonTabFactory;
 
     @FXML
     TabPane tabPane;
@@ -27,13 +28,13 @@ public class MainController {
 
     public MainController() {
         blankTabFactory = BlankTabFactory.getInstance();
-        newTabButtonTabFactory = NewTabButtonTabFactory.getInstance();
+        newTabButtonTabFactory = NewTabButtonTab.getInstance();
 
         this.application = Application.getApplication();
     }
 
     @FXML
-    public void initialize() {
+    public void initialize() {//TODO: split this method into many submethods
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
 
         tabPane.getTabs().addListener((ListChangeListener<Tab>) c -> {
@@ -45,6 +46,19 @@ public class MainController {
 
         tabPane.getTabs().add(blankTabFactory.getTab("Main"));
         tabPane.getTabs().add(newTabButtonTabFactory.getNewTabButtonTab());
+        application.getInstances().addListener((ListChangeListener<Instance>) c -> {
+            while (c.next()) {
+                if (c.wasAdded())
+                    for (Instance a : c.getAddedSubList()) {
+                        tabPane.getTabs().add(a.getTab());
+                        tabPane.getSelectionModel().select(a.getTab());
+                    }
+
+                if (c.wasRemoved())
+                    for (Instance a : c.getRemoved())
+                        tabPane.getTabs().remove(a.getTab());
+            }
+        });
     }
 
     @FXML
@@ -62,7 +76,7 @@ public class MainController {
 
     @FXML
     public void saveFileMenuClick() {
-
+        tabPane.getSelectionModel().getSelectedItem();
     }
 
     @FXML
@@ -72,6 +86,5 @@ public class MainController {
 
     @FXML
     public void closeFileMenuClick() {
-
     }
 }

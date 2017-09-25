@@ -1,4 +1,4 @@
-package main.java.photoviewer.core.files.unit.data.info.dates;
+package photoviewer.core.files.unit.data.info.dates;
 
 import java.util.Date;
 

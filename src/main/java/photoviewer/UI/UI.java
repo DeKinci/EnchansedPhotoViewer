@@ -1,4 +1,4 @@
-package main.java.photoviewer.UI;
+package photoviewer.UI;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,7 +16,7 @@ public class UI {
 
         AnchorPane pane = null;
         try {
-            pane = FXMLLoader.load(getClass().getResource("/main/resources/gui/main.fxml"));
+            pane = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }

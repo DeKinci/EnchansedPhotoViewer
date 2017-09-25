@@ -1,4 +1,4 @@
-package main.java.photoviewer.core.files.unit.data.info.rating;
+package photoviewer.core.files.unit.data.info.rating;
 
 import java.io.Serializable;
 

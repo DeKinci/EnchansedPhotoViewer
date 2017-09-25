@@ -1,4 +1,4 @@
-package main.java.photoviewer.core.files.unit.data.info.name;
+package photoviewer.core.files.unit.data.info.name;
 
 import java.io.Serializable;
 

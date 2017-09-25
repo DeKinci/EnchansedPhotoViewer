@@ -1,9 +1,9 @@
-package main.java.photoviewer.core.files.unit;
+package photoviewer.core.files.unit;
 
-import main.java.photoviewer.core.files.unit.data.content.Content;
-import main.java.photoviewer.core.files.unit.data.content.ContentFactory;
-import main.java.photoviewer.core.files.unit.data.content.ContentIO;
-import main.java.photoviewer.core.files.unit.data.info.Info;
+import photoviewer.core.files.unit.data.content.Content;
+import photoviewer.core.files.unit.data.content.ContentFactory;
+import photoviewer.core.files.unit.data.content.ContentIO;
+import photoviewer.core.files.unit.data.info.Info;
 
 import java.io.*;
 

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<SplitPane fx:id="mainPane" dividerPositions="0.4892367906066536" orientation="VERTICAL" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="photoviewer.UI.controllers.tabcontrollers.contenttabcontrollers.ContentInfoController">
+   <items>
+      <VBox fx:id="tagBox">
+         <children>
+            <Label text="Tags:" />
+            <FlowPane fx:id="tagPane" />
+            <HBox>
+               <children>
+                  <Button fx:id="addTagButton" mnemonicParsing="false" onAction="#addTagClick" text="Add tag" />
+                  <Separator orientation="VERTICAL" />
+                  <TextField fx:id="addedTag" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox fx:id="otherBox">
+         <children>
+            <VBox fx:id="ratingBox">
+               <children>
+                  <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="Rating:" />
+                  <ProgressBar fx:id="ratingBar" prefWidth="200.0" progress="0.0" />
+               </children>
+            </VBox>
+            <Separator prefWidth="200.0" />
+            <VBox fx:id="attStatBox">
+               <children>
+                  <Label text="Likes/Dislikes:" />
+                  <LineChart fx:id="attStatChart">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
+                  </LineChart>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Button fx:id="addLike" mnemonicParsing="false" text="Like!" textFill="#17d73d" />
+                        <Separator orientation="VERTICAL" />
+                        <Button fx:id="addDislike" mnemonicParsing="false" text="Dislike" textFill="RED" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </items>
+</SplitPane>

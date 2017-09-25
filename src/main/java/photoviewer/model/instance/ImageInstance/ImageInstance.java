@@ -1,43 +1,43 @@
-package main.java.photoviewer.model.instance.ImageInstance;
+package photoviewer.model.instance.ImageInstance;
 
 import javafx.scene.control.Tab;
-import main.java.photoviewer.UI.content.tabs.contenttab.ContentTabFactory;
-import main.java.photoviewer.UI.content.tabs.tabfactory.TabFactory;
-import main.java.photoviewer.core.files.unit.PVUnit;
-import main.java.photoviewer.core.files.unit.factory.PVImageFactory;
-import main.java.photoviewer.core.files.unit.factory.PVUnitFactory;
-import main.java.photoviewer.model.instance.Instance;
+import photoviewer.UI.content.tabs.contenttab.ContentTabFactory;
+import photoviewer.core.files.unit.PVUnit;
+import photoviewer.core.files.unit.factory.PVImageFactory;
+import photoviewer.core.files.unit.factory.PVUnitFactory;
+import photoviewer.model.instance.Instance;
 
 import java.io.File;
 import java.io.IOException;
 
 public class ImageInstance implements Instance {
     private PVUnit unit;
-    private PVUnitFactory pvUnitFactory;
 
     private Tab tab;
-    private TabFactory contentTabFactory;
 
     private File openedFile;
 
     public ImageInstance(File file) throws IOException {
         this.openedFile = file;
 
-        this.pvUnitFactory = PVImageFactory.getInstance();
-        this.unit = this.pvUnitFactory.openFile(file);
+        PVUnitFactory pvUnitFactory = PVImageFactory.getInstance();
+        this.unit = pvUnitFactory.openFile(file);
 
-        this.contentTabFactory = ContentTabFactory.getInstance();
-        this.tab = this.contentTabFactory.getTab(this.unit.toString());
+        ContentTabFactory contentTabFactory = ContentTabFactory.getInstance();
+        this.tab = contentTabFactory.getTab(this.unit);
     }
 
+    @Override
     public PVUnit getUnit() {
         return unit;
     }
 
+    @Override
     public Tab getTab() {
         return tab;
     }
 
+    @Override
     public File getOpenedFile() {
         return openedFile;
     }

@@ -1,6 +1,6 @@
-package main.java.photoviewer.model.instance;
+package photoviewer.model.instance;
 
-import main.java.photoviewer.model.instance.ImageInstance.ImageInstance;
+import photoviewer.model.instance.ImageInstance.ImageInstance;
 
 import javax.activation.MimetypesFileTypeMap;
 import java.io.File;
@@ -25,15 +25,6 @@ public class InstanceFactory {
     public Instance openFile(File file) throws IOException {
         Instance instance;
 
-        /*switch (getFileType(file)) {
-            case "image":
-                instance = new ImageInstance(file);
-                break;
-            default:
-                System.err.println("Wrong type");
-                throw new IOException();
-        }*/
-
         try {
             instance = new ImageInstance(file);
         }
@@ -45,6 +36,7 @@ public class InstanceFactory {
         return instance;
     }
 
+    @Deprecated
     private String getFileType(File file) {
         String mimetype = new MimetypesFileTypeMap().getContentType(file);
         return mimetype.split("/")[0];

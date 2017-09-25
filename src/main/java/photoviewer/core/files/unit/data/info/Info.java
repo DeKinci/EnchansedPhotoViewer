@@ -1,12 +1,13 @@
-package main.java.photoviewer.core.files.unit.data.info;
+package photoviewer.core.files.unit.data.info;
 
-import main.java.photoviewer.core.files.unit.data.info.attstat.AttStat;
-import main.java.photoviewer.core.files.unit.data.info.dates.DateCreated;
-import main.java.photoviewer.core.files.unit.data.info.dates.DateModified;
-import main.java.photoviewer.core.files.unit.data.info.dates.DateOpened;
-import main.java.photoviewer.core.files.unit.data.info.name.Name;
-import main.java.photoviewer.core.files.unit.data.info.rating.Rating;
-import main.java.photoviewer.core.files.unit.data.info.tagging.Tags;
+
+import photoviewer.core.files.unit.data.info.attstat.AttStat;
+import photoviewer.core.files.unit.data.info.dates.DateCreated;
+import photoviewer.core.files.unit.data.info.dates.DateModified;
+import photoviewer.core.files.unit.data.info.dates.DateOpened;
+import photoviewer.core.files.unit.data.info.name.Name;
+import photoviewer.core.files.unit.data.info.rating.Rating;
+import photoviewer.core.files.unit.data.info.tagging.Tags;
 
 import java.io.Serializable;
 

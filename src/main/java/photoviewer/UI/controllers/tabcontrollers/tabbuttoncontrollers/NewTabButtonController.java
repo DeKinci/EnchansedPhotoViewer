@@ -1,4 +1,4 @@
-package main.java.photoviewer.UI.controllers.tabcontrollers.tabbuttoncontrollers;
+package photoviewer.UI.controllers.tabcontrollers.tabbuttoncontrollers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

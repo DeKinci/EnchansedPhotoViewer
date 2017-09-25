@@ -1,6 +1,6 @@
-package main.java.photoviewer.core.files.unit.factory;
+package photoviewer.core.files.unit.factory;
 
-import main.java.photoviewer.core.files.unit.PVUnit;
+import photoviewer.core.files.unit.PVUnit;
 
 import java.io.File;
 import java.io.IOException;

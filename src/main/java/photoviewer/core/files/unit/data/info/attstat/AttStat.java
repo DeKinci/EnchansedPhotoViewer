@@ -1,4 +1,4 @@
-package main.java.photoviewer.core.files.unit.data.info.attstat;
+package photoviewer.core.files.unit.data.info.attstat;
 
 import java.io.Serializable;
 import java.util.Date;
