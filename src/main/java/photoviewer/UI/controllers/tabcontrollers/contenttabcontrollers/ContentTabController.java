@@ -6,9 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import photoviewer.core.files.unit.PVUnit;
+import photoviewer.model.core.files.unit.PVUnit;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -43,7 +44,7 @@ public class ContentTabController {
 
     private void setInfoBox() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/tabs/contenttab/infopane.fxml"));
-        SplitPane infoPane = null;
+        BorderPane infoPane = null;
 
         try {
             infoPane = loader.load();

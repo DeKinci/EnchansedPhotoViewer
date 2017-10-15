@@ -9,7 +9,7 @@ import photoviewer.model.instance.InstanceFactory;
 import java.io.File;
 import java.io.IOException;
 
-public class Application {
+public class Application implements Runnable {
     private volatile static Application application = new Application();
 
     private ObservableList<Instance> instances;
@@ -22,6 +22,7 @@ public class Application {
     private Application() {
         instances = FXCollections.observableArrayList();
         instanceFactory = InstanceFactory.getInstanceFactory();
+        new Thread(this).start();
     }
 
     public ObservableList<Instance> getInstances() {
@@ -36,5 +37,13 @@ public class Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void saveFile(int instanceIndex) {
+
+    }
+
+    @Override
+    public void run() {
     }
 }

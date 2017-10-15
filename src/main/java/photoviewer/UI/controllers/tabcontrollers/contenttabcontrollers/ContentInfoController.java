@@ -5,12 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
-import photoviewer.core.files.unit.data.info.Info;
-import photoviewer.core.files.unit.data.info.tagging.Tag;
+import photoviewer.model.core.files.unit.data.info.Info;
+import photoviewer.model.core.files.unit.data.info.tagging.Tag;
 
 import java.io.IOException;
 
@@ -18,7 +18,7 @@ public class ContentInfoController {
     private Info info;
 
     @FXML
-    SplitPane mainPane;
+    BorderPane mainPane;
 
     @FXML
     VBox tagBox;

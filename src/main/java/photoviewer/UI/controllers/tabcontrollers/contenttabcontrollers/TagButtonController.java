@@ -2,7 +2,7 @@ package photoviewer.UI.controllers.tabcontrollers.contenttabcontrollers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import photoviewer.core.files.unit.data.info.tagging.Tag;
+import photoviewer.model.core.files.unit.data.info.tagging.Tag;
 
 public class TagButtonController {
     Tag tag;

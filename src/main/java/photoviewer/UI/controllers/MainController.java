@@ -49,9 +49,9 @@ public class MainController {
         application.getInstances().addListener((ListChangeListener<Instance>) c -> {
             while (c.next()) {
                 if (c.wasAdded())
-                    for (Instance a : c.getAddedSubList()) {
-                        tabPane.getTabs().add(a.getTab());
-                        tabPane.getSelectionModel().select(a.getTab());
+                    for (Instance instance : c.getAddedSubList()) {
+                        tabPane.getTabs().add(instance.getTab());
+                        tabPane.getSelectionModel().select(instance.getTab());
                     }
 
                 if (c.wasRemoved())
@@ -76,12 +76,11 @@ public class MainController {
 
     @FXML
     public void saveFileMenuClick() {
-        tabPane.getSelectionModel().getSelectedItem();
+        application.saveFile(tabPane.getSelectionModel().getSelectedIndex());
     }
 
     @FXML
     public void exportFileMenuClick() {
-
     }
 
     @FXML

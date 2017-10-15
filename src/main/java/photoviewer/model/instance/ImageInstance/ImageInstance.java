@@ -2,9 +2,9 @@ package photoviewer.model.instance.ImageInstance;
 
 import javafx.scene.control.Tab;
 import photoviewer.UI.content.tabs.contenttab.ContentTabFactory;
-import photoviewer.core.files.unit.PVUnit;
-import photoviewer.core.files.unit.factory.PVImageFactory;
-import photoviewer.core.files.unit.factory.PVUnitFactory;
+import photoviewer.model.core.files.unit.PVUnit;
+import photoviewer.model.core.files.unit.factory.PVImageFactory;
+import photoviewer.model.core.files.unit.factory.PVUnitFactory;
 import photoviewer.model.instance.Instance;
 
 import java.io.File;

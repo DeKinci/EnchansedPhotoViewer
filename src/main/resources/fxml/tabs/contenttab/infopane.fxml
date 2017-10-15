@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -7,39 +8,71 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<SplitPane fx:id="mainPane" dividerPositions="0.4892367906066536" orientation="VERTICAL" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="photoviewer.UI.controllers.tabcontrollers.contenttabcontrollers.ContentInfoController">
-   <items>
-      <VBox fx:id="tagBox">
+<BorderPane fx:id="mainPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="photoviewer.UI.controllers.tabcontrollers.contenttabcontrollers.ContentInfoController">
+   <top>
+      <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Tags:" />
-            <FlowPane fx:id="tagPane" />
-            <HBox>
+            <VBox fx:id="tagBox" alignment="TOP_CENTER">
                <children>
-                  <Button fx:id="addTagButton" mnemonicParsing="false" onAction="#addTagClick" text="Add tag" />
-                  <Separator orientation="VERTICAL" />
-                  <TextField fx:id="addedTag" />
+                  <Label text="Tags:" />
+                  <HBox>
+                     <children>
+                        <Button fx:id="addTagButton" minWidth="60.0" mnemonicParsing="false" onAction="#addTagClick" text="Add tag" />
+                        <TextField fx:id="addedTag" maxWidth="1.7976931348623157E308">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <FlowPane fx:id="tagPane">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </FlowPane>
                </children>
-            </HBox>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
          </children>
       </VBox>
-      <VBox fx:id="otherBox">
+   </top>
+   <bottom>
+      <VBox fx:id="otherBox" alignment="BOTTOM_CENTER" BorderPane.alignment="CENTER">
          <children>
-            <VBox fx:id="ratingBox">
+            <Separator prefWidth="200.0" />
+            <VBox fx:id="ratingBox" alignment="TOP_CENTER">
                <children>
-                  <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="Rating:" />
-                  <ProgressBar fx:id="ratingBar" prefWidth="200.0" progress="0.0" />
+                  <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="Rating:">
+                     <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <ProgressBar fx:id="ratingBar" progress="0.0">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                     </padding>
+                  </ProgressBar>
                </children>
             </VBox>
             <Separator prefWidth="200.0" />
-            <VBox fx:id="attStatBox">
+            <VBox fx:id="attStatBox" alignment="TOP_CENTER" prefHeight="230.0" prefWidth="266.0">
                <children>
-                  <Label text="Likes/Dislikes:" />
+                  <Label text="Likes/Dislikes:">
+                     <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
                   <LineChart fx:id="attStatChart">
                      <xAxis>
                         <CategoryAxis side="BOTTOM" />
@@ -47,17 +80,27 @@
                      <yAxis>
                         <NumberAxis side="LEFT" />
                      </yAxis>
+                     <padding>
+                        <Insets bottom="10.0" top="5.0" />
+                     </padding>
                   </LineChart>
                   <HBox alignment="CENTER">
                      <children>
-                        <Button fx:id="addLike" mnemonicParsing="false" text="Like!" textFill="#17d73d" />
-                        <Separator orientation="VERTICAL" />
-                        <Button fx:id="addDislike" mnemonicParsing="false" text="Dislike" textFill="RED" />
+                        <Button fx:id="addLike" mnemonicParsing="false" text="Like!" textFill="#17d73d">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="addDislike" mnemonicParsing="false" text="Dislike" textFill="RED">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </Button>
                      </children>
                   </HBox>
                </children>
             </VBox>
          </children>
       </VBox>
-   </items>
-</SplitPane>
+   </bottom>
+</BorderPane>
