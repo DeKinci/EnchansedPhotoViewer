@@ -10,11 +10,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import photoviewer.apphost.Host;
 import photoviewer.apphost.fileopener.FileOpener;
-import photoviewer.entity.model.BlankEntity;
-import photoviewer.entity.model.Entity;
+import photoviewer.entity.model.entities.BlankEntity;
+import photoviewer.entity.model.entities.Entity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
@@ -51,12 +52,21 @@ public class HostController implements Observer {
         try {
             fileOpener.openFile(selectFile());
         } catch (FileNotFoundException e) {
-            log.trace("Someway file is not opened");
+            log.trace("File is not choosed correctly");
         }
     }
 
     @FXML
     public void saveFileMenuClick() {
+        Entity entity = getEntityByTab(
+                entityPane.getSelectionModel().getSelectedItem());
+
+        try {
+            if (entity != null)
+                entity.save(saveFile());
+        } catch (FileNotFoundException e) {
+            log.trace("File is not choosed correctly");
+        }
     }
 
     @FXML
@@ -80,18 +90,45 @@ public class HostController implements Observer {
     }
 
     private File selectFile() throws FileNotFoundException {
-        File selectedFile = createFileChooser().showOpenDialog(mainPane.getScene().getWindow());
+        File selectedFile = createOpenFileChooser().showOpenDialog(mainPane.getScene().getWindow());
         validateFile(selectedFile);
 
         return selectedFile;
     }
 
-    private FileChooser createFileChooser() {
+    private File saveFile() throws FileNotFoundException {
+        File savingFile = createSaveFileChooser().showSaveDialog(mainPane.getScene().getWindow());
+        validateFile(savingFile);
+
+        try {
+            if (!savingFile.createNewFile())
+                showFileExistsMessage(savingFile.getName());
+        } catch (IOException e) {
+            log.trace(e.getMessage());
+        }
+
+        return savingFile;
+    }
+
+    private void showFileExistsMessage(String fileName) {
+        log.trace("File " + fileName + " already exists, rewriting it");
+    }
+
+    private FileChooser createOpenFileChooser() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open image");
         fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Image Files", "*.epvi", "*.jpg", "*.png")
-        );
+                new FileChooser.ExtensionFilter(
+                        "Image Files", "*.epvi", "*.jpg", "*.png"));
+
+        return fileChooser;
+    }
+
+    private FileChooser createSaveFileChooser() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save image");
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("EPVI image", "*.epvi"));
 
         return fileChooser;
     }
@@ -107,23 +144,24 @@ public class HostController implements Observer {
         if (doesEntityPresents(changed))
             removeTabByEntity(changed);
         else
-            addEntity(changed);
+            addEntityTab(changed);
     }
 
-    private void addEntity(Entity entity) {
+    private void addEntityTab(Entity entity) {
         entityPane.getTabs().add(entity.getTab());
+        entityPane.getSelectionModel().select(entity.getTab());
     }
 
     private boolean doesEntityPresents(Entity entity) {
         for (Tab tab : entityPane.getTabs())
-            if (tab.equals(entity.getTab()))
+            if (tab == entity.getTab())
                 return true;
         return false;
     }
 
     private void removeTabByEntity(Entity entity) {
         for (Tab tab : entityPane.getTabs())
-            if (tab.equals(entity.getTab())) {
+            if (tab == entity.getTab()) {
                 entityPane.getTabs().remove(tab);
                 return;
             }
@@ -133,7 +171,7 @@ public class HostController implements Observer {
         Iterator iterator = host.createIterator();
         while (iterator.hasNext()) {
             Entity entity = (Entity) iterator.next();
-            if (entity.getTab().equals(tab))
+            if (entity.getTab() == tab)
                 return entity;
         }
         return null;

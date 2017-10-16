@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<SplitPane fx:id="unitPane" dividerPositions="0.20261437908496732" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="photoviewer.entity.controller.contenttabcontrollers.ContentTabController">
+<SplitPane fx:id="unitPane" dividerPositions="0.20261437908496732" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="photoviewer.entity.controller.ContentTabController">
   <items>
       <VBox fx:id="infoBox" />
       <StackPane fx:id="contentPane">

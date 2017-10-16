@@ -1,8 +1,8 @@
 package photoviewer.apphost.fileopener;
 
 import photoviewer.apphost.Host;
-import photoviewer.entity.model.EntityFactory;
-import photoviewer.entity.model.mediaentity.ImageEntityFactory;
+import photoviewer.entity.model.entities.EntityFactory;
+import photoviewer.entity.model.entities.ImageEntityFactory;
 
 import java.io.File;
 

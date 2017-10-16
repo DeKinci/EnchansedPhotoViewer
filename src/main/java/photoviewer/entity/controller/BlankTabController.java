@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import photoviewer.UI.content.tabs.blanktab.RecentlyOpenedFiles;
+import photoviewer.UI.content.tabs.RecentlyOpenedFiles;
 import photoviewer.apphost.fileopener.FileOpener;
 
 import java.io.File;
