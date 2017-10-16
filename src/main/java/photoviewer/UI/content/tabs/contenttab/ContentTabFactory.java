@@ -4,8 +4,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import photoviewer.UI.content.tabs.tabfactory.TabFactory;
-import photoviewer.UI.controllers.tabcontrollers.contenttabcontrollers.ContentTabController;
-import photoviewer.model.core.files.unit.PVUnit;
+import photoviewer.entity.controller.contenttabcontrollers.ContentTabController;
+import photoviewer.entity.model.core.files.unit.PVUnit;
 
 import java.io.IOException;
 

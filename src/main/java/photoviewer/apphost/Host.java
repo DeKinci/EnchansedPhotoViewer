@@ -2,7 +2,7 @@ package photoviewer.apphost;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import photoviewer.entity.Entity;
+import photoviewer.entity.model.Entity;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -30,18 +30,24 @@ public class Host extends Observable {
         this.log = LogManager.getLogger();
     }
 
-    public void addInstance(Entity instance) {
-        this.mediaEntities.add(instance);
+    public void addEntity(Entity entity) {
+        this.mediaEntities.add(entity);
+        setChanged();
+        notifyObservers(entity);
     }
 
-    public void removeInstance(Entity instance) {
-        this.mediaEntities.remove(instance);
+    public void removeEntity(Entity entity) {
+        this.mediaEntities.remove(entity);
+        setChanged();
+        notifyObservers(entity);
     }
 
-    public void removeInstanceByID(int id) {
-        for (Entity instance : this.mediaEntities)
-            if (instance.getID() == id) {
-                this.mediaEntities.remove(instance);
+    public void removeEntityByID(int id) {
+        for (Entity entity : this.mediaEntities)
+            if (entity.getID() == id) {
+                this.mediaEntities.remove(entity);
+                setChanged();
+                notifyObservers();
                 break;
             }
     }
@@ -49,4 +55,6 @@ public class Host extends Observable {
     public Iterator createIterator() {
         return this.mediaEntities.iterator();
     }
+
+
 }
